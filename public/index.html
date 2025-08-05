@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcriptor de Voz - Whisper + Ollama</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎤 Transcriptor de Voz</h1>
+            <p>Graba tu voz, transcríbela con Whisper y procésala con Ollama</p>
+            
+            <!-- Aviso de nueva interfaz -->
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem; border-radius: 10px; margin: 1rem 0; text-align: center;">
+                <h3 style="margin: 0 0 0.5rem 0;">🚀 ¡Nueva Interfaz Profesional Disponible!</h3>
+                <p style="margin: 0 0 1rem 0; opacity: 0.9;">Interfaz empresarial con sesiones, upload de archivos, templates IA y más</p>
+                <a href="/pro" style="background: white; color: #667eea; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;">
+                    ✨ Probar Nueva Interfaz
+                </a>
+            </div>
+        </header>
+
+        <main>
+            <!-- Sección de grabación -->
+            <section class="recording-section">
+                <div class="recording-controls">
+                    <button id="startBtn" class="btn btn-primary">
+                        <span class="icon">🎤</span>
+                        Iniciar Grabación
+                    </button>
+                    <button id="stopBtn" class="btn btn-danger" disabled>
+                        <span class="icon">⏹️</span>
+                        Detener Grabación
+                    </button>
+                </div>
+                
+                <div class="recording-status" id="recordingStatus">
+                    <span class="status-text">Listo para grabar</span>
+                    <div class="timer" id="timer">00:00</div>
+                </div>
+
+                <div class="audio-preview" id="audioPreview" style="display: none;">
+                    <h3>Vista previa del audio:</h3>
+                    <audio id="audioPlayback" controls></audio>
+                </div>
+            </section>
+
+            <!-- Sección de transcripción -->
+            <section class="transcription-section">
+                <h2>📝 Transcripción</h2>
+                <div class="action-buttons">
+                    <button id="transcribeBtn" class="btn btn-secondary" disabled>
+                        <span class="icon">🔄</span>
+                        Transcribir con Whisper
+                    </button>
+                </div>
+                
+                <div class="result-box">
+                    <label for="transcriptionResult">Resultado de la transcripción:</label>
+                    <textarea 
+                        id="transcriptionResult" 
+                        placeholder="La transcripción aparecerá aquí..."
+                        readonly
+                    ></textarea>
+                </div>
+            </section>
+
+            <!-- Sección de procesamiento con Ollama -->
+            <section class="ollama-section">
+                <h2>🤖 Procesamiento con Ollama</h2>
+                
+                <div class="prompt-input">
+                    <label for="customPrompt">Prompt personalizado (opcional):</label>
+                    <input 
+                        type="text" 
+                        id="customPrompt" 
+                        placeholder="Ej: Resume este texto en 3 puntos clave..."
+                    >
+                </div>
+
+                <div class="action-buttons">
+                    <button id="processBtn" class="btn btn-secondary" disabled>
+                        <span class="icon">⚡</span>
+                        Procesar con Ollama
+                    </button>
+                </div>
+
+                <div class="result-box">
+                    <label for="ollamaResult">Resultado procesado:</label>
+                    <textarea 
+                        id="ollamaResult" 
+                        placeholder="El texto procesado aparecerá aquí..."
+                        readonly
+                    ></textarea>
+                </div>
+            </section>
+
+            <!-- Sección de estado y logs -->
+            <section class="status-section">
+                <h3>📊 Estado del Sistema</h3>
+                <div class="status-indicators">
+                    <div class="indicator" id="micStatus">
+                        <span class="dot"></span>
+                        <span>Micrófono: <span id="micStatusText">No inicializado</span></span>
+                    </div>
+                    <div class="indicator" id="serverStatus">
+                        <span class="dot"></span>
+                        <span>Servidor: <span id="serverStatusText">Verificando...</span></span>
+                    </div>
+                </div>
+
+                <div class="logs" id="logs">
+                    <h4>Logs de actividad:</h4>
+                    <div class="log-content" id="logContent">
+                        <p class="log-entry">Sistema iniciado</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

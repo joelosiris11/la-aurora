@@ -1,0 +1,411 @@
+/* ====================================
+   LA AURORA - Estilos Página Análisis MODERNOS
+   Material Design + Colores Frescos
+   Solo para body.analysis-page
+   ==================================== */
+
+/* Layout específico para análisis */
+body.analysis-page .app-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    min-height: calc(100vh - var(--header-height));
+}
+
+/* Paneles modernos */
+body.analysis-page .transcription-panel,
+body.analysis-page .analysis-panel,
+body.analysis-page .result-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+body.analysis-page .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-6);
+    border-bottom: 1px solid var(--divider);
+    background: var(--surface-hover);
+}
+
+body.analysis-page .panel-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+body.analysis-page .panel-actions {
+    display: flex;
+    gap: var(--space-2);
+}
+
+/* Panel de Transcripción */
+body.analysis-page .transcription-content {
+    flex: 1;
+    padding: var(--space-6);
+}
+
+body.analysis-page .transcript-textarea {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    padding: var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    resize: none;
+    background: var(--surface-hover);
+    color: var(--text-primary);
+    transition: all var(--transition-normal);
+}
+
+body.analysis-page .transcript-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px var(--primary-50);
+}
+
+/* Panel de Análisis */
+body.analysis-page .analysis-panel {
+    padding: var(--space-6);
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+body.analysis-page .session-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-1);
+}
+
+body.analysis-page .session-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+}
+
+body.analysis-page .session-date {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+}
+
+body.analysis-page .analysis-templates h3 {
+    margin: var(--space-6) 0 var(--space-4) 0;
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    font-weight: 600;
+}
+
+body.analysis-page .templates-grid-large {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+body.analysis-page .template-card-large {
+    background: var(--surface-hover);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-align: left;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body.analysis-page .template-card-large:hover {
+    border-color: var(--primary);
+    background: var(--primary-50);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-3);
+}
+
+body.analysis-page .template-card-large.active {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: var(--text-inverse);
+    transform: scale(1.02);
+    box-shadow: var(--shadow-4);
+}
+
+body.analysis-page .template-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+}
+
+body.analysis-page .template-header h4 {
+    margin: 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
+
+body.analysis-page .template-card-large .template-icon {
+    font-size: var(--text-lg);
+}
+
+body.analysis-page .template-card-large p {
+    margin: 0;
+    font-size: var(--text-xs);
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+body.analysis-page .template-card-large.active p {
+    color: var(--text-inverse);
+    opacity: 0.9;
+}
+
+/* Análisis personalizado */
+body.analysis-page .custom-analysis h3 {
+    margin: var(--space-4) 0 var(--space-3) 0;
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    font-weight: 600;
+}
+
+body.analysis-page .custom-prompt-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+body.analysis-page .custom-prompt-textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: var(--space-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    line-height: 1.4;
+    resize: vertical;
+    background: var(--surface-hover);
+    color: var(--text-primary);
+    transition: all var(--transition-normal);
+}
+
+body.analysis-page .custom-prompt-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px var(--primary-50);
+}
+
+/* Panel de Resultado */
+body.analysis-page .result-content {
+    flex: 1;
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+}
+
+body.analysis-page .result-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+body.analysis-page .placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-6);
+    opacity: 0.5;
+}
+
+body.analysis-page .result-placeholder h3 {
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+body.analysis-page .result-output {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body.analysis-page .analysis-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4);
+    background: var(--surface-hover);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-4);
+}
+
+body.analysis-page .analysis-type {
+    font-weight: 600;
+    color: var(--primary);
+    font-size: var(--text-sm);
+}
+
+body.analysis-page .analysis-timestamp {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+}
+
+body.analysis-page .result-textarea {
+    flex: 1;
+    width: 100%;
+    min-height: 400px;
+    padding: var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    resize: vertical;
+    background: var(--surface-hover);
+    color: var(--text-primary);
+    transition: all var(--transition-normal);
+}
+
+body.analysis-page .result-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px var(--primary-50);
+}
+
+/* Estados de carga modernos */
+body.analysis-page .loading-state {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--text-secondary);
+}
+
+body.analysis-page .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border);
+    border-top: 3px solid var(--primary);
+    border-radius: var(--radius-full);
+    animation: spin 1s linear infinite;
+    margin-bottom: var(--space-6);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Botones específicos de análisis */
+body.analysis-page #generateAnalysisBtn {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-600) 100%);
+    color: var(--text-inverse);
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-xl);
+    padding: var(--space-3) var(--space-6);
+    font-weight: 600;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-2);
+}
+
+body.analysis-page #generateAnalysisBtn:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-4);
+}
+
+body.analysis-page #generateAnalysisBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+body.analysis-page .result-actions .btn-small {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-xs);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+}
+
+/* Responsive para análisis */
+@media (max-width: 1200px) {
+    body.analysis-page .app-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+        gap: var(--space-4);
+        padding: var(--space-4);
+        height: auto;
+        min-height: calc(100vh - var(--header-height));
+    }
+    
+    body.analysis-page .templates-grid-large {
+        grid-template-columns: 1fr;
+        max-height: none;
+    }
+    
+    body.analysis-page .template-card-large {
+        min-height: 60px;
+    }
+    
+    body.analysis-page .transcript-textarea,
+    body.analysis-page .result-textarea {
+        min-height: 200px;
+    }
+    
+    body.analysis-page .analysis-panel {
+        max-height: none;
+        overflow-y: visible;
+    }
+}
+
+@media (max-width: 768px) {
+    body.analysis-page .app-layout {
+        gap: var(--space-3);
+        padding: var(--space-3);
+    }
+    
+    body.analysis-page .panel-header {
+        padding: var(--space-4);
+    }
+    
+    body.analysis-page .transcription-content,
+    body.analysis-page .result-content {
+        padding: var(--space-4);
+    }
+    
+    body.analysis-page .analysis-panel {
+        padding: var(--space-4);
+    }
+    
+    body.analysis-page .templates-grid-large {
+        gap: var(--space-2);
+    }
+    
+    body.analysis-page .template-card-large {
+        padding: var(--space-3);
+        min-height: 50px;
+    }
+}

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA AURORA - Sistema de Reuniones Ejecutivas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-background text-foreground">
+    <!-- Header Principal -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo-section logo-prominent">
+                    <div class="logo-icon"></div>
+                    <div class="logo-text">
+                        <h1 class="app-title">LA AURORA</h1>
+                        <span class="app-subtitle">Sistema de Reuniones Ejecutivas</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="header-center">
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item active" id="currentSession">Nueva Sesión</span>
+                </nav>
+            </div>
+            
+            <div class="header-right">
+                <button class="btn btn-primary" id="newSessionBtn">
+                    <span class="icon">✨</span>
+                    Nueva Sesión
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Layout Principal de 3 Columnas -->
+    <main class="app-layout">
+        <!-- Panel Lateral - Sesiones -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">Sesiones</h2>
+                <div class="sidebar-actions">
+                    <button class="btn-icon" id="refreshSessions" title="Actualizar">
+                        <span>🔄</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Filtros -->
+            <div class="filters-section">
+                <div class="search-box">
+                    <input type="text" id="sessionSearch" placeholder="Buscar sesiones..." class="search-input">
+                    <span class="search-icon">🔍</span>
+                </div>
+                
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">Todas</button>
+                    <button class="filter-tab" data-filter="today">Hoy</button>
+                    <button class="filter-tab" data-filter="week">Semana</button>
+                </div>
+            </div>
+            
+            <!-- Lista de Sesiones -->
+            <div class="sessions-list" id="sessionsList">
+                <div class="session-card sample">
+                    <div class="session-header">
+                        <h3 class="session-title">Sesión de ejemplo</h3>
+                        <span class="session-date">Hace 5 min</span>
+                    </div>
+                    <div class="session-meta">
+                        <span class="session-duration">⏱️ 2:34</span>
+                        <span class="session-status">✅ Completada</span>
+                    </div>
+                    <div class="session-preview">
+                        Ejemplo de transcripción previa...
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Área Central - Trabajo -->
+        <section class="work-area">
+            <div class="work-header">
+                <div class="session-info">
+                    <h2 class="session-title-main" id="currentSessionTitle">Nueva Sesión de Grabación</h2>
+                    
+                    <!-- Stepper de Progreso -->
+                    <div class="progress-stepper" id="progressStepper">
+                        <div class="step active" data-step="1">
+                            <div class="step-icon">🎤</div>
+                            <span class="step-label">Grabar</span>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step" data-step="2">
+                            <div class="step-icon">✨</div>
+                            <span class="step-label">Transcribir</span>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step" data-step="3">
+                            <div class="step-icon">🤖</div>
+                            <span class="step-label">Procesar</span>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step" data-step="4">
+                            <div class="step-icon">💾</div>
+                            <span class="step-label">Guardar</span>
+                        </div>
+                    </div>
+                    
+                    <div class="session-metadata" id="sessionMetadata" style="display: none;">
+                        <input type="text" id="sessionTitleInput" placeholder="Título de la reunión..." class="title-input">
+                        <input type="text" id="sessionParticipants" placeholder="Participantes (opcional)..." class="participants-input">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestañas de Modo -->
+            <div class="mode-tabs">
+                <button class="mode-tab active" data-mode="record" id="recordModeTab">
+                    <span class="icon">🎤</span>
+                    Grabar en vivo
+                </button>
+                <button class="mode-tab" data-mode="upload" id="uploadModeTab">
+                    <span class="icon">📁</span>
+                    Importar Audio
+                </button>
+            </div>
+
+            <!-- Panel de Grabación -->
+            <div class="recording-panel" id="recordingPanel">
+                <div class="recording-visualizer">
+                    <div class="recording-status" id="recordingStatus">
+                        <div class="status-indicator" id="statusIndicator"></div>
+                        <span class="status-text" id="statusText">Listo para grabar</span>
+                    </div>
+                    
+                    <div class="recording-timer" id="recordingTimer">00:00</div>
+                    
+                    <div class="waveform-container" id="waveformContainer">
+                        <div class="waveform-placeholder">
+                            <div class="wave-bars">
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controles de Grabación -->
+                    <div class="recording-controls">
+                        <button class="control-btn primary" id="startRecordBtn">
+                            <span class="icon">⏺️</span>
+                            Iniciar
+                        </button>
+                        <button class="control-btn danger" id="stopRecordBtn" disabled>
+                            <span class="icon">⏹️</span>
+                            Detener
+                        </button>
+                        <button class="control-btn secondary" id="transcribeBtn" disabled>
+                            <span class="icon">✨</span>
+                            Transcribir
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview del Audio -->
+                <div class="audio-preview hidden" id="audioPreview">
+                    <div class="preview-header">
+                        <h3>Vista previa del audio</h3>
+                        <div class="preview-actions">
+                            <button class="btn-small secondary" id="reRecordBtn">🔄 Re-grabar</button>
+                            <button class="btn-small primary" id="proceedTranscribeBtn">▶️ Continuar</button>
+                        </div>
+                    </div>
+                    <audio id="audioPlayback" controls class="audio-player"></audio>
+                </div>
+            </div>
+
+            <!-- Panel de Upload -->
+            <div class="upload-panel hidden" id="uploadPanel">
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-icon">📁</div>
+                    <h3>Arrastra tu archivo de audio aquí</h3>
+                    <p>o haz clic para seleccionar</p>
+                    <div class="upload-formats">
+                        Formatos: MP3, WAV, M4A, WEBM (máx. 100MB)
+                    </div>
+                    <input type="file" id="fileInput" accept=".mp3,.wav,.m4a,.webm" hidden>
+                </div>
+                
+                <div class="upload-progress hidden" id="uploadProgress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="progressText">Subiendo archivo...</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                </div>
+                
+                <!-- Preview del Audio Subido -->
+                <div class="upload-audio-preview hidden" id="uploadAudioPreview">
+                    <div class="preview-header">
+                        <h3 id="uploadedFileName">Audio subido</h3>
+                        <div class="preview-actions">
+                            <button class="btn-small secondary" id="reUploadBtn">🔄 Subir otro</button>
+                            <button class="btn-small primary" id="transcribeUploadedBtn" disabled>✨ Transcribir</button>
+                        </div>
+                    </div>
+                    <audio id="uploadedAudioPlayer" controls class="audio-player"></audio>
+                </div>
+            </div>
+
+            <!-- Botón de transcripción movido arriba a los controles -->
+        </section>
+
+        <!-- Panel Derecho - Resultados -->
+        <aside class="results-panel">
+            <div class="results-header">
+                <h2 class="results-title">Resultados</h2>
+                <div class="results-actions">
+                    <button class="btn-icon" id="exportBtn" title="Exportar" disabled>
+                        <span>📤</span>
+                    </button>
+                    <button class="btn-icon" id="saveSessionBtn" title="Guardar Sesión" disabled>
+                        <span>💾</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabs de Resultados -->
+            <div class="results-tabs">
+                <button class="results-tab active" data-tab="transcription">📝 Transcripción</button>
+                <button class="results-tab" data-tab="summary">🔬 Ir a Análisis</button>
+                <button class="results-tab" data-tab="actions">⚡ Acciones</button>
+            </div>
+
+            <!-- Contenido de Transcripción -->
+            <div class="results-content" id="transcriptionContent">
+                <div class="content-toolbar">
+                    <button class="btn-small" id="copyTranscriptBtn">📋 Copiar</button>
+                    <button class="btn-small" id="editTranscriptBtn">✏️ Editar</button>
+                </div>
+                <div class="content-area">
+                    <textarea 
+                        id="transcriptionResult" 
+                        placeholder="La transcripción aparecerá aquí..."
+                        class="content-textarea"
+                        readonly
+                    ></textarea>
+                </div>
+            </div>
+
+            <!-- Contenido de Resumen -->
+            <div class="results-content hidden" id="summaryContent">
+                <div class="prompt-templates">
+                    <div class="templates-header">
+                        <h4>Templates de Análisis</h4>
+                    </div>
+                    <div class="templates-grid">
+                        <button class="template-card" data-template="executive">
+                            <span class="template-icon">📋</span>
+                            <span class="template-name">Resumen para Jefes</span>
+                        </button>
+                        <button class="template-card" data-template="actions">
+                            <span class="template-icon">✅</span>
+                            <span class="template-name">Lista de Tareas</span>
+                        </button>
+                        <button class="template-card" data-template="decisions">
+                            <span class="template-icon">🎯</span>
+                            <span class="template-name">Decisiones Tomadas</span>
+                        </button>
+                        <button class="template-card" data-template="insights">
+                            <span class="template-icon">💡</span>
+                            <span class="template-name">Ideas Clave</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="custom-prompt">
+                    <input 
+                        type="text" 
+                        id="customPrompt" 
+                        placeholder="O escribe tu propio prompt personalizado..."
+                        class="prompt-input"
+                    >
+                    <button class="btn btn-primary" id="processBtn" disabled>
+                        <span class="icon">✨</span>
+                        Generar Análisis Inteligente
+                    </button>
+                </div>
+
+                <div class="content-area">
+                    <textarea 
+                        id="summaryResult" 
+                        placeholder="El resumen procesado aparecerá aquí..."
+                        class="content-textarea"
+                        readonly
+                    ></textarea>
+                </div>
+            </div>
+
+            <!-- Contenido de Acciones -->
+            <div class="results-content hidden" id="actionsContent">
+                <div class="actions-list" id="actionsList">
+                    <div class="no-actions">
+                        <span class="icon">📝</span>
+                        <p>Las acciones extraídas aparecerán aquí</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Modal Nueva Sesión -->
+    <div class="modal-overlay hidden" id="newSessionModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Nueva Reunión</h3>
+                <button class="modal-close" id="closeModalBtn">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Título de la reunión</label>
+                    <input type="text" id="modalTitle" placeholder="Ej: Standup diario del equipo">
+                </div>
+                <div class="form-group">
+                    <label>Participantes</label>
+                    <input type="text" id="modalParticipants" placeholder="Ej: Juan, María, Carlos">
+                </div>
+                <div class="form-group">
+                    <label>Categoría</label>
+                    <select id="modalCategory">
+                        <option value="meeting">Reunión General</option>
+                        <option value="standup">Daily Standup</option>
+                        <option value="client">Reunión Cliente</option>
+                        <option value="planning">Planificación</option>
+                        <option value="review">Review/Retrospectiva</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="cancelModalBtn">Cancelar</button>
+                <button class="btn primary" id="createSessionBtn">Crear Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema de Notificaciones -->
+    <div class="notifications-container" id="notifications"></div>
+
+    <!-- Scripts -->
+    <script src="components/NotificationSystem.js"></script>
+    <script src="components/ProgressStepper.js"></script>
+    <script src="components/SessionManager.js"></script>
+    <script src="components/RecordingManager.js"></script>
+    <script src="components/UploadManager.js"></script>
+    <script src="components/TranscriptionManager.js"></script>
+    <script src="components/UIManager.js"></script>
+    <script src="components/ActionItems.js"></script>
+    <script src="script-pro.js"></script>
+</body>
+</html>

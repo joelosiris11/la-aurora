@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA AURORA - Análisis de Reuniones</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-analysis.css">
+    <!-- Google Fonts cargadas localmente para evitar CSP -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    </style>
+</head>
+<body class="bg-background text-foreground analysis-page">
+    <!-- Header Principal -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo-section logo-prominent">
+                    <div class="logo-icon"></div>
+                    <div class="logo-text">
+                        <h1 class="app-title">LA AURORA</h1>
+                        <span class="app-subtitle">Análisis de Reuniones Ejecutivas</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="header-center">
+                <nav class="breadcrumb">
+                    <a href="/pro" class="breadcrumb-item">🏠 Principal</a>
+                    <span class="breadcrumb-separator">→</span>
+                    <span class="breadcrumb-item active">📊 Análisis</span>
+                </nav>
+            </div>
+            
+            <div class="header-right">
+                <button class="btn btn-secondary" id="backToMainBtn">
+                    <span class="icon">←</span>
+                    Volver
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Layout Principal -->
+    <main class="app-layout">
+        <!-- Panel Izquierdo - Transcripción -->
+        <section class="transcription-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">📝 Transcripción Original</h2>
+                <div class="panel-actions">
+                    <button class="btn-small secondary" id="editTranscriptBtn">✏️ Editar</button>
+                    <button class="btn-small secondary" id="copyTranscriptBtn">📋 Copiar</button>
+                </div>
+            </div>
+            
+            <div class="transcription-content">
+                <textarea 
+                    id="transcriptionText" 
+                    class="transcript-textarea" 
+                    placeholder="La transcripción aparecerá aquí..."
+                    readonly
+                ></textarea>
+            </div>
+        </section>
+
+        <!-- Panel Central - Análisis -->
+        <section class="analysis-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">🤖 Generador de Análisis</h2>
+                <div class="session-info">
+                    <span class="session-name" id="sessionName">Sesión sin título</span>
+                    <span class="session-date" id="sessionDate">Hoy</span>
+                </div>
+            </div>
+
+            <!-- Templates de Análisis -->
+            <div class="analysis-templates">
+                <h3>Selecciona el tipo de análisis:</h3>
+                <div class="templates-grid-large">
+                    <button class="template-card-large" data-template="executive">
+                        <div class="template-header">
+                            <span class="template-icon">📋</span>
+                            <h4>Resumen Ejecutivo</h4>
+                        </div>
+                        <p>Puntos clave para directivos y toma de decisiones</p>
+                    </button>
+                    
+                    <button class="template-card-large" data-template="actions">
+                        <div class="template-header">
+                            <span class="template-icon">✅</span>
+                            <h4>Plan de Acción</h4>
+                        </div>
+                        <p>Tareas específicas, responsables y fechas límite</p>
+                    </button>
+
+                    <button class="template-card-large" data-template="decisions">
+                        <div class="template-header">
+                            <span class="template-icon">🎯</span>
+                            <h4>Decisiones Tomadas</h4>
+                        </div>
+                        <p>Acuerdos alcanzados y compromisos establecidos</p>
+                    </button>
+
+                    <button class="template-card-large" data-template="insights">
+                        <div class="template-header">
+                            <span class="template-icon">💡</span>
+                            <h4>Ideas y Oportunidades</h4>
+                        </div>
+                        <p>Insights valiosos e oportunidades identificadas</p>
+                    </button>
+
+                    <button class="template-card-large" data-template="risks">
+                        <div class="template-header">
+                            <span class="template-icon">⚠️</span>
+                            <h4>Riesgos y Desafíos</h4>
+                        </div>
+                        <p>Problemas identificados y mitigaciones necesarias</p>
+                    </button>
+
+                    <button class="template-card-large" data-template="followup">
+                        <div class="template-header">
+                            <span class="template-icon">📅</span>
+                            <h4>Seguimiento</h4>
+                        </div>
+                        <p>Próximas reuniones y temas pendientes</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Prompt Personalizado -->
+            <div class="custom-analysis">
+                <h3>Análisis personalizado:</h3>
+                <div class="custom-prompt-section">
+                    <textarea 
+                        id="customPrompt" 
+                        placeholder="Escribe tu prompt..."
+                        class="custom-prompt-textarea"
+                    ></textarea>
+                    <button class="btn btn-primary" id="generateAnalysisBtn" disabled>
+                        <span class="icon">✨</span>
+                        Generar
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Panel Derecho - Resultado -->
+        <section class="result-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">📊 Resultado del Análisis</h2>
+                <div class="result-actions">
+                    <button class="btn-small secondary" id="copyResultBtn" disabled>📋 Copiar</button>
+                    <button class="btn-small secondary" id="exportResultBtn" disabled>📤 Exportar</button>
+                    <button class="btn-small primary" id="saveAnalysisBtn" disabled>💾 Guardar</button>
+                </div>
+            </div>
+
+            <div class="result-content">
+                <div class="result-placeholder" id="resultPlaceholder">
+                    <div class="placeholder-icon">🎯</div>
+                    <h3>Selecciona un tipo de análisis</h3>
+                    <p>Elige una plantilla o escribe un prompt personalizado para generar tu análisis.</p>
+                </div>
+
+                <div class="result-output hidden" id="resultOutput">
+                    <div class="analysis-header">
+                        <span class="analysis-type" id="analysisType">Análisis</span>
+                        <span class="analysis-timestamp" id="analysisTimestamp"></span>
+                    </div>
+                    <textarea 
+                        id="resultText" 
+                        class="result-textarea" 
+                        readonly
+                    ></textarea>
+                </div>
+
+                <div class="loading-state hidden" id="loadingState">
+                    <div class="loading-spinner"></div>
+                    <p>Generando análisis...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Sistema de Notificaciones -->
+    <div class="notifications-container" id="notifications"></div>
+
+    <!-- Scripts -->
+    <script src="components/NotificationSystem.js"></script>
+    <script src="components/AnalysisManager.js"></script>
+    <script src="resumen.js"></script>
+</body>
+</html>
