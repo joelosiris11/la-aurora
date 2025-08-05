@@ -69,31 +69,8 @@ class SessionManager {
     }
 
     loadMockSessions() {
-        // Datos de ejemplo mientras implementamos el backend
-        this.sessions = [
-            {
-                id: 'session-1',
-                title: 'Daily Standup - Equipo Desarrollo',
-                participants: 'Juan, María, Carlos',
-                date: new Date(Date.now() - 5 * 60 * 1000), // 5 min ago
-                duration: '00:02:34',
-                category: 'standup',
-                status: 'completed',
-                transcription: 'Buenos días equipo. Juan reporta avance en la API de usuarios...',
-                summary: 'Reunión de standup diaria con actualizaciones del equipo...'
-            },
-            {
-                id: 'session-2',
-                title: 'Reunión con Cliente ACME Corp',
-                participants: 'Ana, Director ACME, PM',
-                date: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
-                duration: '00:45:12',
-                category: 'client',
-                status: 'completed',
-                transcription: 'Gracias por recibirnos. Queremos discutir los requerimientos...',
-                summary: 'Sesión de levantamiento de requerimientos con cliente...'
-            }
-        ];
+        // No cargar datos de ejemplo, iniciar con lista vacía
+        this.sessions = [];
         this.renderSessions();
     }
 
