@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA AURORA - Modo Automático</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-background text-foreground automatic-mode">
+    <!-- Header Principal -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo-section logo-prominent">
+                    <div class="logo-icon"></div>
+                    <div class="logo-text">
+                        <h1 class="app-title">LA AURORA</h1>
+                        <span class="app-subtitle">Modo Automático - Procesamiento Inteligente</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="header-center">
+                <div class="auto-status" id="autoStatus">
+                    <span class="status-indicator" id="statusIndicator"></span>
+                    <span class="status-text" id="statusText">Listo para procesar</span>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <button class="btn btn-secondary" onclick="window.location.href='/pro'">
+                    <span class="icon">⚙️</span>
+                    Modo Avanzado
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Layout Principal -->
+    <main class="auto-layout" id="autoLayout">
+        
+        <!-- Pantalla Inicial - Selección de Modo -->
+        <section class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-content">
+                <div class="welcome-header">
+                    <div class="welcome-icon">🎯</div>
+                    <h2>Procesamiento Automático de Reuniones</h2>
+                    <p>Selecciona cómo quieres capturar tu reunión. Todo el resto se hace automáticamente.</p>
+                </div>
+                
+                <div class="action-cards">
+                    <div class="action-card record-card" id="recordCard">
+                        <div class="card-icon">🎤</div>
+                        <h3>Grabar en Vivo</h3>
+                        <p>Inicia una grabación y obtén transcripción + análisis automático</p>
+                        <button class="btn btn-primary btn-large" id="startRecordBtn">
+                            <span class="icon">⏺️</span>
+                            Comenzar Grabación
+                        </button>
+                    </div>
+                    
+                    <div class="action-card upload-card" id="uploadCard">
+                        <div class="card-icon">📁</div>
+                        <h3>Subir Archivo</h3>
+                        <p>Sube tu archivo de audio y obtén transcripción + análisis automático</p>
+                        <button class="btn btn-accent btn-large" id="uploadBtn">
+                            <span class="icon">📤</span>
+                            Seleccionar Archivo
+                        </button>
+                        <input type="file" id="fileInput" accept=".mp3,.wav,.m4a,.webm" hidden>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pantalla de Grabación -->
+        <section class="recording-screen hidden" id="recordingScreen">
+            <div class="recording-content">
+                <div class="recording-header">
+                    <h2>🎤 Grabando Reunión</h2>
+                    <div class="recording-timer" id="recordingTimer">00:00</div>
+                </div>
+                
+                <div class="recording-visualizer">
+                    <div class="waveform-container" id="waveformContainer">
+                        <div class="waveform-placeholder">
+                            <div class="wave-bars">
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recording-controls">
+                        <button class="control-btn danger btn-large" id="stopRecordBtn">
+                            <span class="icon">⏹️</span>
+                            Finalizar Grabación
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pantalla de Procesamiento -->
+        <section class="processing-screen hidden" id="processingScreen">
+            <div class="processing-content">
+                <div class="processing-header">
+                    <h2>🤖 Procesando Automáticamente</h2>
+                    <p>Estamos transcribiendo y analizando tu reunión...</p>
+                </div>
+                
+                <div class="processing-steps">
+                    <div class="process-step" id="step1">
+                        <div class="step-icon">💾</div>
+                        <div class="step-content">
+                            <h3>Guardando Audio</h3>
+                            <div class="step-status">✅ Completado</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step active" id="step2">
+                        <div class="step-icon">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <div class="step-content">
+                            <h3>Transcribiendo con Whisper</h3>
+                            <div class="step-status">⏳ Procesando...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" id="step3">
+                        <div class="step-icon">🧠</div>
+                        <div class="step-content">
+                            <h3>Analizando con IA</h3>
+                            <div class="step-status">⏳ Esperando...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" id="step4">
+                        <div class="step-icon">📊</div>
+                        <div class="step-content">
+                            <h3>Generando Resumen</h3>
+                            <div class="step-status">⏳ Esperando...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pantalla de Resultados -->
+        <section class="results-screen hidden" id="resultsScreen">
+            <div class="results-layout">
+                <!-- Panel Izquierdo - Transcripción -->
+                <div class="transcription-panel">
+                    <div class="panel-header">
+                        <h3>📝 Transcripción Completa</h3>
+                        <div class="panel-actions">
+                            <button class="btn-small secondary" id="copyTranscriptBtn">📋 Copiar</button>
+                        </div>
+                    </div>
+                    <div class="panel-content">
+                        <div class="transcript-text" id="transcriptText">
+                            La transcripción aparecerá aquí automáticamente...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel Derecho - Resumen Ejecutivo -->
+                <div class="summary-panel">
+                    <div class="panel-header">
+                        <h3>📊 Resumen Ejecutivo</h3>
+                        <div class="panel-actions">
+                            <button class="btn-small secondary" id="copySummaryBtn">📋 Copiar</button>
+                            <button class="btn-small primary" id="downloadBtn">📥 Descargar</button>
+                        </div>
+                    </div>
+                    <div class="panel-content">
+                        <div class="summary-text" id="summaryText">
+                            El resumen ejecutivo se generará automáticamente...
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Acciones Finales -->
+            <div class="final-actions">
+                <button class="btn btn-secondary btn-large" id="newSessionBtn">
+                    <span class="icon">🔄</span>
+                    Nueva Sesión
+                </button>
+                <button class="btn btn-primary btn-large" id="advancedAnalysisBtn">
+                    <span class="icon">🔬</span>
+                    Análisis Avanzado
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Sistema de Notificaciones -->
+    <div class="notifications-container" id="notifications"></div>
+
+    <!-- Scripts -->
+    <script src="components/NotificationSystem.js"></script>
+    <script src="automatic.js"></script>
+</body>
+</html>
