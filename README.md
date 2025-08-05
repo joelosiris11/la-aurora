@@ -58,11 +58,20 @@ alias aurora="cd $(pwd) && node server.js"
 
 ## 🎯 Uso
 
-1. **Accede** a http://localhost:3000/pro
-2. **Crea una nueva sesión** con título y participantes
-3. **Graba en vivo** o **sube un archivo de audio**
-4. **Transcribe** automáticamente con Whisper
-5. **Analiza** con diferentes plantillas de IA:
+### 🏠 Página Principal (http://localhost:3000)
+Selector de modos con información del sistema y acceso directo a:
+
+### 🎯 Modo Automático (http://localhost:3000/auto)
+1. **Selecciona** grabar en vivo o subir archivo
+2. **Espera** el procesamiento automático
+3. **Revisa** transcripción y resumen ejecutivo
+4. **Descarga** o accede al análisis avanzado
+
+### ⚙️ Modo Profesional (http://localhost:3000/pro)
+1. **Crea una nueva sesión** con título y participantes
+2. **Graba en vivo** o **sube un archivo de audio**
+3. **Transcribe** automáticamente con Whisper
+4. **Analiza** con diferentes plantillas de IA:
    - 📋 Resumen Ejecutivo
    - ✅ Plan de Acción
    - 🎯 Decisiones Tomadas

@@ -3,134 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transcriptor de Voz - Whisper + Ollama</title>
+    <title>LA AURORA - Sistema de Reuniones Ejecutivas</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>🎤 Transcriptor de Voz</h1>
-            <p>Graba tu voz, transcríbela con Whisper y procésala con Ollama</p>
-            
-            <!-- Avisos de nuevas interfaces -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem; border-radius: 10px; text-align: center;">
-                    <h3 style="margin: 0 0 0.5rem 0;">🚀 Interfaz Profesional</h3>
-                    <p style="margin: 0 0 1rem 0; opacity: 0.9; font-size: 0.9rem;">Sesiones, templates IA, análisis avanzado</p>
-                    <a href="/pro" style="background: white; color: #667eea; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-block; font-size: 0.9rem;">
-                        ⚙️ Modo Avanzado
-                    </a>
-                </div>
-                
-                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 1rem; border-radius: 10px; text-align: center;">
-                    <h3 style="margin: 0 0 0.5rem 0;">🎯 Modo Automático</h3>
-                    <p style="margin: 0 0 1rem 0; opacity: 0.9; font-size: 0.9rem;">Procesamiento completamente automático</p>
-                    <a href="/auto" style="background: white; color: #f5576c; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-block; font-size: 0.9rem;">
-                        ✨ Pruébalo Ahora
-                    </a>
+<body class="bg-background text-foreground mode-selector">
+    <div class="mode-selector-layout">
+        <!-- Header con Logo -->
+        <header class="selector-header">
+            <div class="logo-section logo-prominent">
+                <div class="logo-icon"></div>
+                <div class="logo-text">
+                    <h1 class="app-title">LA AURORA</h1>
+                    <span class="app-subtitle">Sistema de Reuniones Ejecutivas con IA Local</span>
                 </div>
             </div>
         </header>
 
-        <main>
-            <!-- Sección de grabación -->
-            <section class="recording-section">
-                <div class="recording-controls">
-                    <button id="startBtn" class="btn btn-primary">
-                        <span class="icon">🎤</span>
-                        Iniciar Grabación
-                    </button>
-                    <button id="stopBtn" class="btn btn-danger" disabled>
-                        <span class="icon">⏹️</span>
-                        Detener Grabación
-                    </button>
-                </div>
-                
-                <div class="recording-status" id="recordingStatus">
-                    <span class="status-text">Listo para grabar</span>
-                    <div class="timer" id="timer">00:00</div>
-                </div>
+        <!-- Contenido Principal -->
+        <main class="selector-main">
+            <div class="welcome-section">
+                <div class="welcome-icon">🏢</div>
+                <h2 class="welcome-title">Bienvenido a LA AURORA</h2>
+                <p class="welcome-description">
+                    Sistema profesional de transcripción y análisis de reuniones ejecutivas.<br>
+                    Utiliza modelos de IA 100% locales para máxima privacidad y seguridad.
+                </p>
+            </div>
 
-                <div class="audio-preview" id="audioPreview" style="display: none;">
-                    <h3>Vista previa del audio:</h3>
-                    <audio id="audioPlayback" controls></audio>
-                </div>
-            </section>
-
-            <!-- Sección de transcripción -->
-            <section class="transcription-section">
-                <h2>📝 Transcripción</h2>
-                <div class="action-buttons">
-                    <button id="transcribeBtn" class="btn btn-secondary" disabled>
-                        <span class="icon">🔄</span>
-                        Transcribir con Whisper
-                    </button>
-                </div>
-                
-                <div class="result-box">
-                    <label for="transcriptionResult">Resultado de la transcripción:</label>
-                    <textarea 
-                        id="transcriptionResult" 
-                        placeholder="La transcripción aparecerá aquí..."
-                        readonly
-                    ></textarea>
-                </div>
-            </section>
-
-            <!-- Sección de procesamiento con Ollama -->
-            <section class="ollama-section">
-                <h2>🤖 Procesamiento con Ollama</h2>
-                
-                <div class="prompt-input">
-                    <label for="customPrompt">Prompt personalizado (opcional):</label>
-                    <input 
-                        type="text" 
-                        id="customPrompt" 
-                        placeholder="Ej: Resume este texto en 3 puntos clave..."
-                    >
-                </div>
-
-                <div class="action-buttons">
-                    <button id="processBtn" class="btn btn-secondary" disabled>
-                        <span class="icon">⚡</span>
-                        Procesar con Ollama
-                    </button>
-                </div>
-
-                <div class="result-box">
-                    <label for="ollamaResult">Resultado procesado:</label>
-                    <textarea 
-                        id="ollamaResult" 
-                        placeholder="El texto procesado aparecerá aquí..."
-                        readonly
-                    ></textarea>
-                </div>
-            </section>
-
-            <!-- Sección de estado y logs -->
-            <section class="status-section">
-                <h3>📊 Estado del Sistema</h3>
-                <div class="status-indicators">
-                    <div class="indicator" id="micStatus">
-                        <span class="dot"></span>
-                        <span>Micrófono: <span id="micStatusText">No inicializado</span></span>
+            <!-- Selección de Modos -->
+            <div class="mode-cards">
+                <div class="mode-card automatic-card" onclick="window.location.href='/auto'">
+                    <div class="card-header">
+                        <div class="card-icon">🎯</div>
+                        <h3 class="card-title">Modo Automático</h3>
                     </div>
-                    <div class="indicator" id="serverStatus">
-                        <span class="dot"></span>
-                        <span>Servidor: <span id="serverStatusText">Verificando...</span></span>
+                    <div class="card-content">
+                        <p class="card-description">
+                            Procesamiento completamente automático. Ideal para reuniones rápidas que necesitan 
+                            transcripción y resumen ejecutivo inmediato.
+                        </p>
+                        <ul class="card-features">
+                            <li>✨ Un clic para procesar</li>
+                            <li>🎤 Grabación o subida de archivos</li>
+                            <li>📊 Resumen ejecutivo automático</li>
+                            <li>⚡ Resultados en minutos</li>
+                        </ul>
+                        <div class="card-action">
+                            <span class="btn btn-accent btn-large">
+                                <span class="icon">🚀</span>
+                                Comenzar Ahora
+                            </span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="logs" id="logs">
-                    <h4>Logs de actividad:</h4>
-                    <div class="log-content" id="logContent">
-                        <p class="log-entry">Sistema iniciado</p>
+                <div class="mode-card professional-card" onclick="window.location.href='/pro'">
+                    <div class="card-header">
+                        <div class="card-icon">⚙️</div>
+                        <h3 class="card-title">Modo Profesional</h3>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-description">
+                            Interfaz avanzada con control total. Perfecto para reuniones complejas que 
+                            requieren análisis detallado y gestión de sesiones.
+                        </p>
+                        <ul class="card-features">
+                            <li>📁 Gestión completa de sesiones</li>
+                            <li>🔬 Templates de análisis IA</li>
+                            <li>📈 Reportes ejecutivos detallados</li>
+                            <li>🎛️ Control granular del proceso</li>
+                        </ul>
+                        <div class="card-action">
+                            <span class="btn btn-primary btn-large">
+                                <span class="icon">🏢</span>
+                                Acceder al Sistema
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+
+            <!-- Información del Sistema -->
+            <div class="system-info">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-icon">🤖</div>
+                        <h4>IA Local</h4>
+                        <p>Whisper + Ollama<br>100% privado</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🔒</div>
+                        <h4>Seguridad</h4>
+                        <p>Sin conexión a internet<br>Datos locales</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">⚡</div>
+                        <h4>Velocidad</h4>
+                        <p>Procesamiento local<br>Sin latencia</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">💰</div>
+                        <h4>Sin Costos</h4>
+                        <p>No hay límites<br>Uso ilimitado</p>
+                    </div>
+                </div>
+            </div>
         </main>
-    </div>
 
-    <script src="script.js"></script>
+        <!-- Footer -->
+        <footer class="selector-footer">
+            <p>LA AURORA v1.0 - Sistema de Reuniones Ejecutivas</p>
+            <p>Tecnología: Whisper (OpenAI) + Ollama + Node.js</p>
+        </footer>
+    </div>
 </body>
 </html>
