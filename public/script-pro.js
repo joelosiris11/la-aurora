@@ -24,7 +24,7 @@ class ReunionApp {
             this.notificationSystem = new NotificationSystem();
             this.progressStepper = new ProgressStepper();
             this.sessionManager = new SessionManager(this.notificationSystem, this.progressStepper);
-            this.recordingManager = new RecordingManager(this.notificationSystem, this.progressStepper);
+            this.recordingManager = new RecordingManager(this.notificationSystem, this.sessionManager, this.progressStepper);
             this.uploadManager = new UploadManager(this.notificationSystem, this.sessionManager);
             this.transcriptionManager = new TranscriptionManager(this.notificationSystem, this.progressStepper);
             this.uiManager = new UIManager(this.notificationSystem, this.sessionManager);
@@ -50,7 +50,7 @@ class ReunionApp {
     }
 
     setupCrossReferences() {
-        // Hacer que los managers se conozcan entre sí
+        // Configurar referencias adicionales entre managers
         if (this.recordingManager && this.transcriptionManager) {
             this.recordingManager.transcriptionManager = this.transcriptionManager;
         }

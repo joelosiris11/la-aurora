@@ -101,6 +101,13 @@ class RecordingManager {
 
     async startRecording() {
         try {
+            // Verificar que el sessionManager está disponible
+            if (!this.sessionManager || typeof this.sessionManager.getCurrentSession !== 'function') {
+                console.error('SessionManager no está disponible:', this.sessionManager);
+                this.notifications.error('Error: Sistema no inicializado correctamente');
+                return;
+            }
+
             // Verificar que hay una sesión activa
             if (!this.sessionManager.getCurrentSession()) {
                 this.notifications.warning('Crea una nueva sesión antes de grabar');
